@@ -11,13 +11,13 @@
     <preference name="permissions" value="none" />
     
     <!--<preference name="orientation" value="default" />-->
-    <preference name="Orientation" value="landscape" />
+    <preference name="orientation" value="landscape" />
     <!--<preference name="orientation" value="portrait" />-->
 
     <!--<preference name="target-device" value="universal" />-->
     <preference name="target-device" value="android" />
-    <preference name="Fullscreen" value="true" />
-    <preference name="webviewbounce" value="true" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="false" />
     <preference name="prerendered-icon" value="true" />
     <preference name="stay-in-webview" value="false" />
     <preference name="ios-statusbarstyle" value="black-opaque" />

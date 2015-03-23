@@ -127,6 +127,16 @@ body {
     font-size: 14px;
 }
 
+a {
+	outline: none;
+}
+
+a:active,
+a:focus,
+a:hover {
+	outline: none;
+}
+
 .ui-header.ui-bar-inherit {
     background-color: #2A2A2A;
     border-color: #2A2A2A;
@@ -141,6 +151,12 @@ body {
     background-color: #2A2A2A;
     border-color: #2A2A2A;
     color: #FFFFFF;
+}
+
+.ui-footer-fixed.ui-footer.remove-background,
+.ui-footer-fixed.remove-background {
+	background: #FFFFFF;
+	border: 0;
 }
 
 .ui-mobile label {
@@ -195,8 +211,8 @@ body {
 }
 
 .btn-small img {
-	margin-left: -4px;
-	margin-top: -2px;
+	/*margin-left: -4px;
+	margin-top: -2px;*/
 	width: 47px;
 	
 }
@@ -224,4 +240,10 @@ body {
 
 .ui-content {
 	margin-bottom: 10px;
+}
+
+#btn-like-us {
+	position: absolute;
+	top: 50%;
+	left: 50%;
 }

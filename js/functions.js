@@ -1,6 +1,8 @@
 // Globals
 var counterBorders = 0;
 var actualBorder = 0;
+var AccessToken = '';
+var facebook_fan_page = 'https://facebook.com/';
 
 $(document).ready(function() {
 	//$(document).on('mobileinit', function() {
@@ -49,6 +51,12 @@ function onDeviceReady() {
 		$('#user_name').val('');
 		$('#user_password').val('');
 	});
+	
+	// Prepares like buton
+	jQuery('#mainPage').on('pageshow', function(e) {
+		$('#user_name').val('');
+		$('#user_password').val('');
+	});
     
 	// Login button event
 	$('#login_form').submit(function(e) { 
@@ -91,7 +99,7 @@ function onDeviceReady() {
 					///alert(response.fila);
 					$('.txt_customer').html(response.cus_name);
 					
-					
+					facebook_fan_page = response.cus_fb;
 					
 					if (response.borders) {
 						$('#content-borders-temp').html('<strong>MARCOS DISPONIBLES:</strong><br />');
@@ -100,7 +108,7 @@ function onDeviceReady() {
 							//alert( index + ": " + value );
 							counterBorders++;
 							$('#content-borders-temp').append('<img class="border-thumbnail" src="' + value + '" alt="border-' + index + '" />');
-							$('#workArea').append('<img class="border-image" src="' + value + '" id="border-' + counterBorders + '" alt="border-' + index + '" style="' + (counterBorders > 1 ? 'display: none;' : '') + '" />');
+							$('.workArea').append('<img class="border-image border-' + counterBorders + '" src="' + value + '" id="" alt="border-' + index + '" style="' + (counterBorders > 1 ? 'display: none;' : '') + '" />');
 						});
 						actualBorder = 1;
 					}
@@ -142,7 +150,9 @@ function onDeviceReady() {
 	
 	// do everything here.
 	$('.takeScreenShot').click(function() {
-		navigator.camera.getPicture( cameraSuccess, cameraError, { quality: 50,
+		navigator.camera.getPicture( cameraSuccess, cameraError, {
+			quality: 50,
+			cameraDirection: 1,
 			destinationType: Camera.DestinationType.DATA_URL
 		});
 	});
@@ -156,7 +166,7 @@ function onDeviceReady() {
 			actualBorder--;
 		}
 		$('.border-image').hide();
-		$('#border-' + actualBorder).show();
+		$('.border-' + actualBorder).show();
 	});
 	
 	$('.changeBorderRight').click(function() {
@@ -167,9 +177,69 @@ function onDeviceReady() {
 			actualBorder++;
 		}
 		$('.border-image').hide();
-		$('#border-' + actualBorder).show();
+		$('.border-' + actualBorder).show();
 	});
 }
+
+
+
+		
+            var login = function () {
+                if (!window.cordova) {
+                    var appId = prompt("Enter FB Application ID", "");
+                    facebookConnectPlugin.browserInit(appId);
+                }
+                facebookConnectPlugin.login( ["email"], 
+			function (response) {
+				alert(JSON.stringify(response));
+				//alert(response.authResponse.accesssToken);
+				alert(JSON.stringify(response.authResponse.accesssToken));
+				
+				facebookConnectPlugin.getAccessToken(
+					function (response) {
+						//return (JSON.stringify(response))
+						
+						AccessToken = JSON.stringify(response);
+						alert('https://graph.facebook.com/me/og.likes?access_token='+AccessToken+'&object='+facebook_fan_page);
+						$('#btn-like-us').attr('href', 'https://graph.facebook.com/me/og.likes?access_token='+AccessToken+'&object='+facebook_fan_page);
+					},
+					function (response) {
+						alert(JSON.stringify(response))
+					}
+				);
+			},
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var showDialog = function () { 
+                facebookConnectPlugin.showDialog( { method: "feed" }, 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var apiTest = function () { 
+                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) }); 
+            }
+
+            var getAccessToken = function () { 
+                facebookConnectPlugin.getAccessToken(
+                    function (response) { return (JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var getStatus = function () { 
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var logout = function () { 
+                facebookConnectPlugin.logout( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
 
 function cameraSuccess(imageData) {
 	// Do something with the image
@@ -177,6 +247,21 @@ function cameraSuccess(imageData) {
 	//image.src = "data:image/jpeg;base64," + imageData;
 	
 	$('#workPage').css('background-image','url(data:image/jpeg;base64,' + imageData + ')');
+	
+	$.mobile.changePage("#workPage");
+	
+	//$('#workPage').append('<img src="data:image/jpeg;base64,' + imageData + '" alt="" />');
+	navigator.notification.alert('Picture taken successed');
+}
+
+function cameraSuccess2(imageData) {
+	// Do something with the image
+	//var image = document.getElementById('myImage');
+	//image.src = "data:image/jpeg;base64," + imageData;
+	
+	//$('#workPage').css('background-image','url(data:image/jpeg;base64,' + imageData + ')');
+	$('#workPage').css('background-image','url(' + imageData + ')');
+	
 	$.mobile.changePage("#workPage");
 	
 	//$('#workPage').append('<img src="data:image/jpeg;base64,' + imageData + '" alt="" />');

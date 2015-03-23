@@ -69,13 +69,13 @@
 								
 								<p><button type="submit" class="ui-btn ui-corner-all">Iniciar sesión</button></p>
 							</form>
-							
-							<div class="event listening button" onclick="login();">Login with Facebook</div>
-							<div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
-							<div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
-							<div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
-							<div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
-							<div class="event listening button" onclick="logout();">Logout with Facebook</div>
+							<hr />
+							<button class="event listening button" onclick="login();">Login with Facebook</button>
+							<button class="event listening button" onclick="showDialog();">Show Dialog with Facebook</button>
+							<button class="event listening button" onclick="apiTest();">Test API with Facebook</button>
+							<button class="event listening button" onclick="getAccessToken();">Get access token with Facebook</button>
+							<button class="event listening button" onclick="getStatus();">Get login status with Facebook</button>
+							<button class="event listening button" onclick="logout();">Logout with Facebook</button>
 						</div>
 					</div>
 				        <div class="ui-block-c">
@@ -111,7 +111,7 @@
 								Iniciar aplicación
 							</button>
 							
-							<button id="openCustomCameraBtn">Open Custom Camera</button>
+							<button id="openCustomCameraBtn">Abrir Cámara</button>
 						</p>
 						<div class="text-center">
 							<div id="content-borders-temp">
@@ -140,7 +140,7 @@
 			<h1 class="txt_customer"></h1>
 		</div>--><!-- /header -->
 		
-		<div id="workArea" data-role="content">
+		<div class="workArea" data-role="content">
 			<!--<button class="takeScreenShot">Volver a Tomar Foto</button>-->
 			
 			<!--<p><a href="#startPage">&laquo; Regresar</a></p>-->
@@ -148,28 +148,48 @@
 			<!--<p><a href="#mainPage">&laquo; Siguiente</a></p>-->
 		</div><!-- /content -->
 		
-		<div data-role="footer" class="ui-footer-fixed">
+		<div data-role="footer" class="ui-footer-fixed remove-background">
 			<div class="text-center">
-				<button class="takeScreenShot btn-small">
+				<a class="takeScreenShot btn-small">
 					<img src="img/icons/btn_camera.png" alt="Tomar otra foto" />
-				</button>
+				</a>
 				
-				<button class="changeBorderLeft btn-small">
+				<a class="changeBorderLeft btn-small">
 					<img src="img/icons/btn_prev.png" alt="Marco anterior" />
-				</button>
+				</a>
 				
-				<button class="changeBorderRight btn-small">
+				<a class="changeBorderRight btn-small">
 					<img src="img/icons/btn_next.png" alt="Marco siguiente" />
-				</button>
+				</a>
 				
-				<button class="shareOnFacebook btn-small">
+				<a class="shareOnFacebook btn-small" onclick="showDialog();">
 					<img src="img/icons/btn_facebook.png" alt="Compartir en Facebook" />
-				</button>
+				</a>
 				
-				<button class="SendByMail btn-small">
-					<img src="img/icons/btn_next.png" alt="Enviar por correo" />
-				</button>
+				<a class="SendByMail btn-small" href="#endPage">
+					<img src="img/icons/btn_email.png" alt="Enviar por correo" />
+				</a>
 			</div>
+		</div><!-- /footer -->
+	</div><!-- /page -->
+	
+	<!-- Start of third page -->
+	<div id="endPage" data-role="page" data-transition="flip">
+		<!--<div class="content-border"></div>-->
+		<!--<div data-role="header">
+			<h1 class="txt_customer"></h1>
+		</div>--><!-- /header -->
+		
+		<div class="workArea" data-role="content">
+			<!--<button class="takeScreenShot">Volver a Tomar Foto</button>-->
+			
+			<!--<p><a href="#startPage">&laquo; Regresar</a></p>-->
+			<a id="btn-like-us" href="https://graph.facebook.com/me/og.likes?access_token=FB_ACCESS_TOKEN&object=URL_TO_LIKE">Síguenos en Facebook</a>
+			<!--<p><a href="#mainPage">&laquo; Siguiente</a></p>-->
+		</div><!-- /content -->
+		
+		<div data-role="footer" class="ui-footer-fixed">
+			<h4>Síguenos en Facebook para finalizar</h4>
 		</div><!-- /footer -->
 	</div><!-- /page -->
 	
@@ -184,55 +204,23 @@
 		document.getElementById("openCustomCameraBtn").addEventListener("click", function() {
 		    customCamera.getPicture("latest_scan.jpg", function(imagePath) {
 			alert("File path: " + imagePath);
+			cameraSuccess2(imagePath);
 		    }, function(error) {
 			alert(error);
 		    }, {
-			targetWidth: 1000
+			targetWidth: 1000,
+			targetHeight: 1000,
+			cameraDirection: 1,
+			//destinationType: customCamera.DestinationType.DATA_URL,
+			quality: 50,
 		    });
 		}, false);
         </script>
 	
 	<script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
 	<script type="text/javascript">
-            var login = function () {
-                if (!window.cordova) {
-                    var appId = prompt("Enter FB Application ID", "");
-                    facebookConnectPlugin.browserInit(appId);
-                }
-                facebookConnectPlugin.login( ["email"], 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var showDialog = function () { 
-                facebookConnectPlugin.showDialog( { method: "feed" }, 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var apiTest = function () { 
-                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) }); 
-            }
-
-            var getAccessToken = function () { 
-                facebookConnectPlugin.getAccessToken( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
-            var getStatus = function () { 
-                facebookConnectPlugin.getLoginStatus( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-
-            var logout = function () { 
-                facebookConnectPlugin.logout( 
-                    function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
+		// Facebook
+		
         </script>
 	<!--<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript">
