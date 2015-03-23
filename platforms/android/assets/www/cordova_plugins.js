@@ -48,6 +48,20 @@ module.exports = [
         "merges": [
             "navigator.screenshot"
         ]
+    },
+    {
+        "file": "plugins/com.performanceactive.plugins.camera/www/js/customcamera.js",
+        "id": "com.performanceactive.plugins.camera.customCamera",
+        "clobbers": [
+            "navigator.customCamera"
+        ]
+    },
+    {
+        "file": "plugins/com.phonegap.plugins.facebookconnect/facebookConnectPlugin.js",
+        "id": "com.phonegap.plugins.facebookconnect.FacebookConnectPlugin",
+        "clobbers": [
+            "facebookConnectPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -55,7 +69,9 @@ module.exports.metadata =
 {
     "org.apache.cordova.camera": "0.3.5",
     "org.apache.cordova.dialogs": "0.3.0",
-    "com.darktalker.cordova.screenshot": "0.1.0"
+    "com.darktalker.cordova.screenshot": "0.1.0",
+    "com.performanceactive.plugins.camera": "1.4",
+    "com.phonegap.plugins.facebookconnect": "0.11.0"
 }
 // BOTTOM OF METADATA
 });

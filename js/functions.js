@@ -3,40 +3,52 @@ var counterBorders = 0;
 var actualBorder = 0;
 
 $(document).ready(function() {
-	// are we running in native app or in a browser?
-	window.isphone = false;
-	
-	if (document.URL.indexOf("http://") === -1 
-		&& document.URL.indexOf("https://") === -1) {
-		window.isphone = true;
-	}
-    
-	if (window.isphone) {
-		//Wait for Cordova to connect with the device
-		document.addEventListener("deviceready", onDeviceReady, false);
-	}
-	else {
-		onDeviceReady();
-	}
+	//$(document).on('mobileinit', function() {
+		//$.mobile.changePage("#startPage");
+		
+		// are we running in native app or in a browser?
+		window.isphone = false;
+		
+		if (document.URL.indexOf("http://") === -1 
+			&& document.URL.indexOf("https://") === -1) {
+			window.isphone = true;
+		}
+	    
+		if (window.isphone) {
+			//Wait for Cordova to connect with the device
+			document.addEventListener("deviceready", onDeviceReady, false);
+		}
+		else {
+			onDeviceReady();
+		}
+	//});
 });
 
-var cameraOptions = { 
-	quality : 75,
-	destinationType : Camera.DestinationType.DATA_URL,
-	sourceType : Camera.PictureSourceType.CAMERA,
-	allowEdit : true,
-	encodingType: Camera.EncodingType.JPEG,
-	targetWidth: 100,
-	targetHeight: 100,
-	popoverOptions: CameraPopoverOptions,
-	saveToPhotoAlbum: false
-};
+//var cameraOptions = { 
+//	quality : 75,
+//	destinationType : Camera.DestinationType.DATA_URL,
+//	sourceType : Camera.PictureSourceType.CAMERA,
+//	allowEdit : true,
+//	encodingType: Camera.EncodingType.JPEG,
+//	targetWidth: 100,
+//	targetHeight: 100,
+//	popoverOptions: CameraPopoverOptions,
+//	saveToPhotoAlbum: false
+//};
 
 //Cordova is ready to be used!
 function onDeviceReady() {
 	//navigator.notification.alert('Device is ready!');
 	//alert('Device is ready!');
-    
+	
+	$('#user_name').val('');
+	$('#user_password').val('');
+	
+	// Clear login form
+	jQuery('#mainPage').on('pageshow', function(e) {
+		$('#user_name').val('');
+		$('#user_password').val('');
+	});
     
 	// Login button event
 	$('#login_form').submit(function(e) { 
@@ -82,9 +94,12 @@ function onDeviceReady() {
 					
 					
 					if (response.borders) {
+						$('#content-borders-temp').html('<strong>MARCOS DISPONIBLES:</strong><br />');
+						
 						$.each(response.borders, function( index, value ) {
-							alert( index + ": " + value );
+							//alert( index + ": " + value );
 							counterBorders++;
+							$('#content-borders-temp').append('<img class="border-thumbnail" src="' + value + '" alt="border-' + index + '" />');
 							$('#workArea').append('<img class="border-image" src="' + value + '" id="border-' + counterBorders + '" alt="border-' + index + '" style="' + (counterBorders > 1 ? 'display: none;' : '') + '" />');
 						});
 						actualBorder = 1;
@@ -98,7 +113,7 @@ function onDeviceReady() {
 					
 					
 					
-					//$('#content_customer').html('<img src="' + response.logo + '" alt="' + response.cus_name + '" />');
+					$('#content_customer').html('<img src="' + response.logo + '" alt="' + response.cus_name + '" />');
 					$.mobile.changePage("#startPage");
 				}
 				else {

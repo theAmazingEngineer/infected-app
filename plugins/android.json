@@ -19,6 +19,34 @@
                         {
                             "xml": "<feature name=\"Screenshot\"><param name=\"android-package\" value=\"com.darktalker.cordova.screenshot.Screenshot\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"CustomCamera\"><param name=\"android-package\" value=\"com.performanceactive.plugins.camera.CustomCamera\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"android-package\" value=\"org.apache.cordova.facebook.ConnectPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://m.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://graph.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://api.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
+                            "count": 1
                         }
                     ]
                 }
@@ -29,6 +57,48 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"true\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.camera.autofocus\" android:required=\"true\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:configChanges=\"orientation\" android:name=\"com.performanceactive.plugins.camera.CustomCameraActivity\" android:screenOrientation=\"portrait\"></activity>",
+                            "count": 1
+                        }
+                    ],
+                    "application": [
+                        {
+                            "xml": "<meta-data android:name=\"com.facebook.sdk.ApplicationId\" android:value=\"@string/fb_app_id\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<activity android:label=\"@string/fb_app_name\" android:name=\"com.facebook.LoginActivity\" android:theme=\"@android:style/Theme.Translucent.NoTitleBar\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "res/values/facebookconnect.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<string name=\"fb_app_id\">815674461858790</string>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<string name=\"fb_app_name\">ImHere</string>",
+                            "count": 1
                         }
                     ]
                 }
@@ -43,6 +113,14 @@
             "PACKAGE_NAME": "com.theamazingengineer.imhere"
         },
         "com.darktalker.cordova.screenshot": {
+            "PACKAGE_NAME": "com.theamazingengineer.imhere"
+        },
+        "com.performanceactive.plugins.camera": {
+            "PACKAGE_NAME": "com.theamazingengineer.imhere"
+        },
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "815674461858790",
+            "APP_NAME": "ImHere",
             "PACKAGE_NAME": "com.theamazingengineer.imhere"
         }
     },

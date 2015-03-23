@@ -149,6 +149,7 @@ body {
 
 #content_customer {
     background: #000000;
+    text-align: center;
 }
 
 .border-image {
@@ -173,10 +174,54 @@ body {
 	width: 100%;
 }*/
 
+.ui-page-theme-a .ui-btn.btn-imhere {
+	background: #ED1B24;
+	color: #FFFFFF;
+}
+
 .btn-small {
-	
+	/**/
+	background: none;
+	/*border: 0;*/
+	border-radius: 100%;
+	margin: 0;
+	padding: 0;
+	/*padding: 10px;*/
+	/*-webkit-box-shadow: inset 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    inset 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         inset 7px 7px 5px 0px rgba(50, 50, 50, 0.75);*/
+	width: 48px;
+	height: 49px;
 }
 
 .btn-small img {
-	width: 30px;
+	margin-left: -4px;
+	margin-top: -2px;
+	width: 47px;
+	
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.margin-top {
+	margin-top: 10px;
+}
+
+.border-thumbnail {
+	margin-left: 10px;
+	width: 100px;
+}
+
+.ui-content {
+	margin-bottom: 10px;
 }
