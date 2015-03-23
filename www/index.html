@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	
+	<title>Im Here</title>
+</head>
+<body>
+	<!--<div class="app">
+		<h1>PhoneGap</h1>
+		<div id="deviceready" class="blink">
+			<p class="event listening">Connecting to Device</p>
+			<p class="event received">Device is Ready</p>
+			<p><button>CAM</button></p>
+		</div>
+	</div>-->
+	
+	<!-- Start of first page -->
+	<div id="mainPage" data-role="page" data-transition="flip">
+		<div data-role="header">
+			<h1><img class="img-logo" src="img/logo_home.png" alt="Im Here" /></h1>
+		</div><!-- /header -->
+		
+		<div role="main" class="ui-content">
+			<div class="ui-corner-all custom-corners">
+				<div class="ui-grid-b">
+				        <div class="ui-block-a">
+						<!--<div class="ui-bar ui-bar-a" style="height:60px">Block A</div>-->
+					</div>
+				        <div class="ui-block-b">
+						<div class="ui-bar ui-bar-a">
+							<h3>Por favor inicie sesión</h3>
+						</div>
+						<div class="ui-body ui-body-a">
+							<form id="login_form">
+								<p><label for="user_name">Usuario:</label></p>
+								<p><input type="text" id="user_name" name="user_name" /></p>
+								
+								<p><label for="user_password">Contraseña:</label></p>
+								<p><input type="password" id="user_password" name="user_password" /></p>
+								
+								<p><button type="submit" class="ui-btn ui-corner-all">Iniciar sesión</button></p>
+							</form>
+							
+							<div class="event listening button" onclick="login();">Login with Facebook</div>
+							<div class="event listening button" onclick="showDialog();">Show Dialog with Facebook</div>
+							<div class="event listening button" onclick="apiTest();">Test API with Facebook</div>
+							<div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
+							<div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
+							<div class="event listening button" onclick="logout();">Logout with Facebook</div>
+						</div>
+					</div>
+				        <div class="ui-block-c">
+						<!--<div class="ui-bar ui-bar-a" style="height:60px">Block C</div>-->
+					</div>
+				</div><!-- /grid-b -->
+			</div>
+			<!--<p><button id="takePicture">CAM</button></p>-->
+		</div><!-- /content -->
+		
+		<div data-role="footer" class="ui-footer-fixed">
+			<h4>&copy; Im Here | All Rights Reserved</h4>
+		</div><!-- /footer -->
+	</div><!-- /page -->
+	
+	<!-- Start of second page -->
+	<div id="startPage" data-role="page" data-transition="flip">
+		<div data-role="header">
+			<h1 class="txt_customer"></h1>
+		</div><!-- /header -->
+		
+		<div data-role="ui-content">
+			<div class="ui-corner-all custom-corners">
+				<div class="ui-grid-b">
+				        <div class="ui-block-a">
+						<!--<div class="ui-bar ui-bar-a" style="height:60px">Block A</div>-->
+					</div>
+				        <div class="ui-block-b">
+						<!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+						<div id="content_customer" class="margin-top"></div>
+						<p>
+							<button class="takeScreenShot btn-imhere">
+								Iniciar aplicación
+							</button>
+							
+							<button id="openCustomCameraBtn">Open Custom Camera</button>
+						</p>
+						<div class="text-center">
+							<div id="content-borders-temp">
+								<strong>NO HAY MARCOS DISPONIBLES EN ESTE MOMENTO!</strong>
+							</div>
+						</div>
+						<p><a href="#mainPage" data-direction="reverse">&laquo; Regresar y cambiar de usuario</a></p>
+					</div>
+					<div class="ui-block-c">
+						<!--<div class="ui-bar ui-bar-a" style="height:60px">Block C</div>-->
+					</div>
+				</div><!-- /grid-b -->
+			</div>
+			<!--<p><button class="takeScreenShot">Tomar Foto</button></p>-->
+		</div><!-- /content -->
+		
+		<div data-role="footer" class="ui-footer-fixed">
+			<h4>&copy; Im Here | All Rights Reserved</h4>
+		</div><!-- /footer -->
+	</div><!-- /page -->
+	
+	<!-- Start of third page -->
+	<div id="workPage" data-role="page" data-transition="flip">
+		<!--<div class="content-border"></div>-->
+		<!--<div data-role="header">
+			<h1 class="txt_customer"></h1>
+		</div>--><!-- /header -->
+		
+		<div id="workArea" data-role="content">
+			<!--<button class="takeScreenShot">Volver a Tomar Foto</button>-->
+			
+			<!--<p><a href="#startPage">&laquo; Regresar</a></p>-->
+			
+			<!--<p><a href="#mainPage">&laquo; Siguiente</a></p>-->
+		</div><!-- /content -->
+		
+		<div data-role="footer" class="ui-footer-fixed">
+			<div class="text-center">
+				<button class="takeScreenShot btn-small">
+					<img src="img/icons/btn_camera.png" alt="Tomar otra foto" />
+				</button>
+				
+				<button class="changeBorderLeft btn-small">
+					<img src="img/icons/btn_prev.png" alt="Marco anterior" />
+				</button>
+				
+				<button class="changeBorderRight btn-small">
+					<img src="img/icons/btn_next.png" alt="Marco siguiente" />
+				</button>
+				
+				<button class="shareOnFacebook btn-small">
+					<img src="img/icons/btn_facebook.png" alt="Compartir en Facebook" />
+				</button>
+				
+				<button class="SendByMail btn-small">
+					<img src="img/icons/btn_next.png" alt="Enviar por correo" />
+				</button>
+			</div>
+		</div><!-- /footer -->
+	</div><!-- /page -->
+	
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile.js"></script>
+	
+	<script type="text/javascript" src="js/functions.js"></script>
+	
+	<script src="js/customcamera.js"></script>
+	<script>
+		document.getElementById("openCustomCameraBtn").addEventListener("click", function() {
+		    customCamera.getPicture("latest_scan.jpg", function(imagePath) {
+			alert("File path: " + imagePath);
+		    }, function(error) {
+			alert(error);
+		    }, {
+			targetWidth: 1000
+		    });
+		}, false);
+        </script>
+	
+	<script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
+	<script type="text/javascript">
+            var login = function () {
+                if (!window.cordova) {
+                    var appId = prompt("Enter FB Application ID", "");
+                    facebookConnectPlugin.browserInit(appId);
+                }
+                facebookConnectPlugin.login( ["email"], 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var showDialog = function () { 
+                facebookConnectPlugin.showDialog( { method: "feed" }, 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var apiTest = function () { 
+                facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) }); 
+            }
+
+            var getAccessToken = function () { 
+                facebookConnectPlugin.getAccessToken( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+            
+            var getStatus = function () { 
+                facebookConnectPlugin.getLoginStatus( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+
+            var logout = function () { 
+                facebookConnectPlugin.logout( 
+                    function (response) { alert(JSON.stringify(response)) },
+                    function (response) { alert(JSON.stringify(response)) });
+            }
+        </script>
+	<!--<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript">
+		app.initialize();
+	</script>-->
+</body>
+</html>
