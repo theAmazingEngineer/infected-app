@@ -53,7 +53,7 @@
     <gap:plugin name="org.apache.cordova.vibration" />
     
     <gap:plugin name="com.darktalker.cordova.screenshot" version="0.1.0" />
-    <gap:plugin name="com.performanceactive.plugins.camera.CustomCamera" version="1.4" />
+    <gap:plugin name="com.performanceactive.plugins.camera" version="1.4" />
     <feature name="CustomCamera">
         <!--<param name="ios-package" value="CustomCamera" />-->
         <param name="android-package" value="com.performanceactive.plugins.camera.CustomCamera"/>
